@@ -235,6 +235,8 @@
                     comEntityDict = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&jsonError];
                 if (!error && !jsonError) {
                     
+                    // Assign entities.
+                    
                     NSArray *rawEntities = comEntityDict[@"entities"];
                     NSMutableDictionary *entities = [NSMutableDictionary dictionary];
                     for (NSDictionary *rawEntity in rawEntities) {
@@ -243,6 +245,7 @@
                         entity.properties = rawEntity[@"properties"];
                         
                         NSMutableArray *rawIntAddress = entity.properties[@"int_address"];
+                        // Flatten internal address array
                         NSString *joined = [rawIntAddress componentsJoinedByString:@", "];
                         entity.intAddress = [joined stringByReplacingOccurrencesOfString:@"$id" withString:((NSNumber *)rawEntity[@"id"]).stringValue];
                         
@@ -270,6 +273,8 @@
 
 
 - (void)addDefaultStyleRules {
+    // Add default styles.  The order that these rules are added establishes their order of evaluation (the first rule that matches for a particular geometry wins).  The draw priorities are important for having overlapping geometries display in the correct order.
+    
     [self addStyleRule:[[MaplyMicelloStyleRule alloc] initWithKey:@"is_root" value:@(YES) desc:@{kMaplyDrawPriority:@(_baseDrawPriority)}]];
     [self addStyleRule:[[MaplyMicelloStyleRule alloc] initWithKey:@"$style" value:@"Background" desc:@{kMaplyDrawPriority:@(_baseDrawPriority+1)}]];
     [self addStyleRule:[[MaplyMicelloStyleRule alloc] initWithKey:@"meta" value:@"level outline" desc:@{kMaplyDrawPriority:@(_baseDrawPriority+2)}]];
@@ -290,6 +295,8 @@
 }
 
 - (void)startFetchLevel:(MaplyMicelloMapLevel *__nonnull)level success:(nonnull void (^)(MaplyMicelloMapLevel *__nullable level)) successBlock failure:(nullable void(^)(NSError *__nonnull error)) failureBlock {
+    
+    // Start fetching a particular level.
     
     if (level.features) {
         successBlock(level);
@@ -313,6 +320,8 @@
                         NSMutableDictionary *rawGeometry = rawFeature[@"geometry"];
                         NSString *sType = rawGeometry[@"type"];
                         if ([sType isEqualToString:@"Polygon"]) {
+                            
+                            // Normalize coordinates to the center of the community map, to retain more precision.
                             NSMutableArray *coords = rawGeometry[@"coordinates"];
                             for (NSMutableArray *ring in coords) {
                                 for (NSMutableArray *coord in ring) {
@@ -323,6 +332,7 @@
                                 }
                             }
                             
+                            // Assign location and label_area attributes of the feature to the geometry, so that they can be used directly from the geometry elsewhere.
                             NSMutableDictionary *rawLocation = rawFeature[@"location"];
                             NSMutableDictionary *rawLabelArea = rawFeature[@"label_area"];
                             NSMutableDictionary *rawProperties = rawFeature[@"properties"];
@@ -335,6 +345,7 @@
                     MaplyVectorObject *vecObj = [MaplyVectorObject VectorObjectFromGeoJSONDictionary:jsonDict];
                     NSArray *features = [vecObj splitVectors];
                     
+                    // Assign entity center lat/lon from the geometry
                     for (MaplyVectorObject *vObj in features) {
                         NSArray *entities = vObj.attributes[@"entities"];
                         if (entities) {
@@ -366,6 +377,7 @@
 
 - (void)startFetchZLevel:(int)zLevel success:(nonnull void (^)()) successBlock failure:(nullable void(^)(NSError *__nonnull error)) failureBlock {
     
+    // Recursively call startFetchLevels:success:failure: for all levels corresponding to the z-level
     NSArray *levels = self.zLevelsToLevels[@(zLevel)];
     if (levels)
         [self startFetchLevels:levels success:successBlock failure:failureBlock];
@@ -378,12 +390,12 @@
 - (void)startFetchLevels:(NSArray *__nonnull)levels success:(nonnull void (^)()) successBlock failure:(nullable void(^)(NSError *__nonnull error)) failureBlock {
     
     MaplyMicelloMapLevel *level = levels[0];
-    NSArray *newLevels = [levels subarrayWithRange:NSMakeRange(1, levels.count-1)];
-    
+    NSArray *remainingLevels = [levels subarrayWithRange:NSMakeRange(1, levels.count-1)];
     [self startFetchLevel:level success:^(MaplyMicelloMapLevel * _Nullable level) {
         
-        if (newLevels.count > 0)
-            [self startFetchLevels:newLevels success:successBlock failure:failureBlock];
+        // Recursively call startFetchLevels:success:failure: for the remaining levels
+        if (remainingLevels.count > 0)
+            [self startFetchLevels:remainingLevels success:successBlock failure:failureBlock];
         else
             successBlock();
         
@@ -422,7 +434,7 @@
 }
 
 - (unsigned int)styleIndexForFeature:(MaplyVectorObject *)feature {
-    
+    // Return the index of the first rule in the styleRules array that successfully matches the feature, or else returns the first invalid index (the size of the array)
     for (unsigned int i=0; i<_styleRules.count; i++) {
         MaplyMicelloStyleRule *styleRule = _styleRules[i];
         NSObject *value = feature.attributes[styleRule.key];
@@ -443,6 +455,7 @@
 - (NSDictionary *)vectorDescForStyleIndex:(unsigned int)styleIndex baseDesc:(NSDictionary *)baseDesc {
     if (styleIndex >= _styleRules.count)
         return baseDesc;
+    // Apply style rule attributes onto the basic description dictionary.
     MaplyMicelloStyleRule *styleRule = _styleRules[styleIndex];
     NSMutableDictionary *desc = [NSMutableDictionary dictionaryWithDictionary:baseDesc];
     [desc addEntriesFromDictionary:styleRule.desc];
@@ -451,7 +464,7 @@
 
 - (void)setZLevel:(int)zLevel viewC:(MaplyBaseViewController *__nonnull)viewC {
     
-    
+    // Remove any vectors or labels that have been previously placed.
     if (self.zLevel != -1) {
         self.zLevel = -1;
         
@@ -475,7 +488,10 @@
 
     }
     
+    // Fetch the levels corresponding to the z-level.
     [self startFetchZLevel:zLevel success:^{
+        
+        // Add the vectors and labels
         
         NSArray *levels = self.zLevelsToLevels[@(zLevel)];
         
@@ -528,6 +544,7 @@
             [noSelFeaturesArrays addObject:[NSMutableArray array]];
         }
         
+        // For all levels matching the desired z-level, sort features by which style rule will apply.
         for (MaplyMicelloMapLevel *level in levels) {
         
             for (MaplyVectorObject *feature in level.features) {
@@ -544,8 +561,7 @@
             }
         }
         
-        
-        
+        // Add sorted vector features to map.
         for (int i=0; i<_styleRules.count+1; i++) {
             MaplyComponentObject *selCompObj = [viewC addVectors:((NSMutableArray *)selFeaturesArrays[i]) desc:[self vectorDescForStyleIndex:i baseDesc:fillSelDesc]];
             [_fillCompObjs addObject:selCompObj];
@@ -577,7 +593,8 @@
     MaplyMicelloMapEntity *entity = (MaplyMicelloMapEntity *)vObj.userObject;
     if (!entity)
         return nil;
-    
+
+    // Clear any previous selection outline
     if (_highlightCompObj) {
         [viewC removeObject:_highlightCompObj];
         _highlightCompObj = nil;
@@ -594,12 +611,15 @@
                                   kMaplySelectable :     @(NO),
                                   };
     
+    // Add selection outline for selected vector feature
     _highlightCompObj = [viewC addVectors:@[vObj] desc:outlineDesc];
 
+    // Return entity corresponding to selected vector feature
     return entity;
 }
 
 - (void)clearSelectionViewC:(MaplyBaseViewController *__nonnull)viewC {
+    // Clear any previous selection outline
     if (_highlightCompObj) {
         [viewC removeObject:_highlightCompObj];
         _highlightCompObj = nil;

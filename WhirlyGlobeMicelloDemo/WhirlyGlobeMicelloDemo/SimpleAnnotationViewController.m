@@ -3,7 +3,7 @@
 //  WhirlyGlobeMicelloDemo
 //
 //  Created by Ranen Ghosh on 2016-04-16.
-//  Copyright © 2016 Ranen Ghosh. All rights reserved.
+//  Copyright 2011-2016 mousebird consulting
 //
 
 #import "SimpleAnnotationViewController.h"

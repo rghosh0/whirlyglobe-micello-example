@@ -22,6 +22,8 @@
 #import <WhirlyGlobeComponent.h>
 
 /** @brief An entity of interest in a community that corresponds to a geometry in the map.
+    @details If an entity is selected by the user, you can use the MaplyMicelloMapEntity object given to you to access information about that entity.
+    @see MaplyMicelloMap select:viewC:
  */
 @interface  MaplyMicelloMapEntity : NSObject
 
@@ -34,6 +36,7 @@
 @end
 
 /** @brief A level is a subset of a drawing sharing a common vertical alignment.
+    @details You probably won't need to use this directly.
  */
 @interface  MaplyMicelloMapLevel : NSObject
 
@@ -41,11 +44,14 @@
 @property (readonly, nonatomic, strong) NSString *_Nonnull name;
 @property (readonly, nonatomic, assign) int zLevel;
 @property (readonly, nonatomic, assign) bool isMain;
+
+/// @brief An array of the MaplyVectorObjects created by parsing the geometries belonging to this level.
 @property (readonly, nonatomic, strong) NSArray *_Nonnull features;
 
 @end
 
 /** @brief A subset of the geometries in a Micello map.
+    @details You probably won't need to use this directly.
  */
 @interface  MaplyMicelloMapDrawing : NSObject
 
@@ -54,19 +60,35 @@
 @property (readonly, nonatomic, strong) NSString *_Nonnull name;
 @property (readonly, nonatomic, strong) NSString *_Nonnull displayName;
 @property (readonly, nonatomic, strong) NSString *_Nonnull mapType;
+
+/// @brief A dictionary mapping level ID to level, for levels in this drawing.
 @property (readonly, nonatomic, strong) NSDictionary *_Nonnull levels;
 @property (readonly, nonatomic, strong) MaplyMicelloMapLevel *_Nullable mainLevel;
 
 @end
 
 /** @brief A simple rule to apply Maply vector attributes to features that match a criterion.
+    @details A geometry will receive the vector attributes if, in its properties, the value corresponding to the provided key matches the provided value.
+    @details The vector attributes correspond to what MaplyBaseViewController addVectors:desc:mode:
+    @details At this point kMaplyColor and kMaplyDrawPriority work.  The draw priority may be important to display geometries in the proper z-order.
+    @see MaplyBaseViewController addVectors:desc:mode:
  */
 @interface  MaplyMicelloStyleRule : NSObject
 
+/** @brief Initialize a MaplyMicelloStyleRule object.
+    @param key The key in the geometry properties to look up.
+    @param value The value in the geometry properties to match.
+    @param desc The Maply vector attributes to apply if the rule matches.
+ */
 - (nullable instancetype)initWithKey:(NSString *__nonnull)key value:(NSObject *__nonnull)value desc:(NSDictionary *__nonnull)desc;
 
+/// @brief The key in the geometry properties to look up.
 @property (nonatomic, strong) NSString *_Nonnull key;
+
+/// @brief The value in the geometry properties to match.
 @property (nonatomic, strong) NSObject *_Nonnull value;
+
+/// @brief The Maply vector attributes to apply if the rule matches.
 @property (nonatomic, strong) NSDictionary *_Nonnull desc;
 
 @end
@@ -98,6 +120,7 @@
 @property (readonly, nonatomic, assign) double centerLatDeg;
 
 /// @brief A sorted array of the z-levels available in the community map.
+/// @details (An array of NSNumbers)
 /// @details Read-only; available after calling startFetchMapWithSuccess:failure:.
 @property (readonly, nonatomic, strong) NSArray *_Nonnull zLevels;
 
@@ -149,6 +172,8 @@
 
 /** @brief Add a style rule to the Community Map.
     @details Add one or more style rules before setting the z-level of the map. Rules are evaluated in the order in which they are added, so in the case of ambiguity add more important rules first.
+    @details The vector attributes correspond to what MaplyBaseViewController addVectors:desc:mode:
+    @details At this point kMaplyColor and kMaplyDrawPriority work.  The draw priority may be important to display geometries in the proper z-order.
     @param styleRule The style rule to add.
     @see MaplyMicelloStyleRule
  */
