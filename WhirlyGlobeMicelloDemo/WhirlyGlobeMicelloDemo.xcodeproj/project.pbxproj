@@ -26,7 +26,7 @@
 		E59DBB8A1CBFE7250025B4D6 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E59DBB891CBFE7250025B4D6 /* CoreLocation.framework */; };
 		E59DBB8D1CBFF0950025B4D6 /* MaplyMicelloMap.m in Sources */ = {isa = PBXBuildFile; fileRef = E59DBB8C1CBFF0950025B4D6 /* MaplyMicelloMap.m */; };
 		E59DBB901CC004BF0025B4D6 /* SanJoseBoundary.geojson in Resources */ = {isa = PBXBuildFile; fileRef = E59DBB8E1CC004BF0025B4D6 /* SanJoseBoundary.geojson */; };
-		E59DBB911CC004BF0025B4D6 /* SantaClaraCountyBoundary.geojson in Resources */ = {isa = PBXBuildFile; fileRef = E59DBB8F1CC004BF0025B4D6 /* SantaClaraCountyBoundary.geojson */; };
+		E59DBB911CC004BF0025B4D6 /* SantaClaraBoundary.geojson in Resources */ = {isa = PBXBuildFile; fileRef = E59DBB8F1CC004BF0025B4D6 /* SantaClaraBoundary.geojson */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -65,7 +65,7 @@
 		E59DBB8B1CBFF0950025B4D6 /* MaplyMicelloMap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MaplyMicelloMap.h; sourceTree = "<group>"; };
 		E59DBB8C1CBFF0950025B4D6 /* MaplyMicelloMap.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MaplyMicelloMap.m; sourceTree = "<group>"; };
 		E59DBB8E1CC004BF0025B4D6 /* SanJoseBoundary.geojson */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = SanJoseBoundary.geojson; sourceTree = SOURCE_ROOT; };
-		E59DBB8F1CC004BF0025B4D6 /* SantaClaraCountyBoundary.geojson */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = SantaClaraCountyBoundary.geojson; sourceTree = SOURCE_ROOT; };
+		E59DBB8F1CC004BF0025B4D6 /* SantaClaraBoundary.geojson */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = SantaClaraBoundary.geojson; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -135,7 +135,7 @@
 				E56FB5DB1CC1774300F25D47 /* bgBlue.png */,
 				E56FB5DC1CC1774300F25D47 /* bgYellow.png */,
 				E59DBB8E1CC004BF0025B4D6 /* SanJoseBoundary.geojson */,
-				E59DBB8F1CC004BF0025B4D6 /* SantaClaraCountyBoundary.geojson */,
+				E59DBB8F1CC004BF0025B4D6 /* SantaClaraBoundary.geojson */,
 				E59DBB631CBFDA200025B4D6 /* main.m */,
 			);
 			name = "Supporting Files";
@@ -229,7 +229,7 @@
 				E59DBB6F1CBFDA200025B4D6 /* Assets.xcassets in Resources */,
 				E56FB5DE1CC1774300F25D47 /* bgYellow.png in Resources */,
 				E59DBB6D1CBFDA200025B4D6 /* Main.storyboard in Resources */,
-				E59DBB911CC004BF0025B4D6 /* SantaClaraCountyBoundary.geojson in Resources */,
+				E59DBB911CC004BF0025B4D6 /* SantaClaraBoundary.geojson in Resources */,
 				E53C84131CC8111300F396E2 /* micelloKey in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
