@@ -13,7 +13,7 @@
 @implementation ViewController
 {
     WhirlyGlobeViewController *globeVC;
-    MaplyComponentObject *countyCompObj, *cityCompObj;
+    MaplyComponentObject *santaClaraCompObj, *sanJoseCompObj;
     MaplyMicelloMap *micelloMap;
     UISegmentedControl *segCtrl;
 }
@@ -37,17 +37,17 @@
     [globeVC addLayer:layer];
     
     // Add Santa Clara county boundary
-    NSString *path = [[NSBundle mainBundle] pathForResource:@"SantaClaraCountyBoundary" ofType:@"geojson"];
-    MaplyVectorObject *countyVecObj = [MaplyVectorObject VectorObjectFromGeoJSON:[[NSFileManager defaultManager] contentsAtPath:path]];
-    countyCompObj = [globeVC addVectors:@[countyVecObj] desc:@{
+    NSString *path = [[NSBundle mainBundle] pathForResource:@"SantaClaraBoundary" ofType:@"geojson"];
+    MaplyVectorObject *santaClaraVecObj = [MaplyVectorObject VectorObjectFromGeoJSON:[[NSFileManager defaultManager] contentsAtPath:path]];
+    santaClaraCompObj = [globeVC addVectors:@[santaClaraVecObj] desc:@{
                                                                kMaplyVecTexture:    [UIImage imageNamed:@"bgYellow.png"],
                                                                kMaplyDrawPriority:  @(400),
                                                                kMaplyFilled:        @(YES)}];
 
     // Add San Jose boundary
     path = [[NSBundle mainBundle] pathForResource:@"SanJoseBoundary" ofType:@"geojson"];
-    MaplyVectorObject *cityVecObj = [MaplyVectorObject VectorObjectFromGeoJSON:[[NSFileManager defaultManager] contentsAtPath:path]];
-    cityCompObj = [globeVC addVectors:@[cityVecObj] desc:@{
+    MaplyVectorObject *sanJoseVecObj = [MaplyVectorObject VectorObjectFromGeoJSON:[[NSFileManager defaultManager] contentsAtPath:path]];
+    sanJoseCompObj = [globeVC addVectors:@[sanJoseVecObj] desc:@{
                                                                kMaplyVecTexture:    [UIImage imageNamed:@"bgBlue.png"],
                                                                kMaplyDrawPriority:  @(500),
                                                                kMaplyFilled:        @(YES)}];
