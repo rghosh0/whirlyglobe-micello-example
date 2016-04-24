@@ -13,9 +13,10 @@
 @implementation ViewController
 {
     WhirlyGlobeViewController *globeVC;
-    MaplyComponentObject *santaClaraCompObj, *sanJoseCompObj;
+    
     MaplyMicelloMap *micelloMap;
     UISegmentedControl *segCtrl;
+    MaplyComponentObject *sanJoseCompObj, *santaClaraCompObj;
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -43,18 +44,16 @@
                                                                kMaplyVecTexture:    [UIImage imageNamed:@"bgYellow.png"],
                                                                kMaplyDrawPriority:  @(400),
                                                                kMaplyFilled:        @(YES)}];
-
+    
     // Add San Jose boundary
     path = [[NSBundle mainBundle] pathForResource:@"SanJoseBoundary" ofType:@"geojson"];
     MaplyVectorObject *sanJoseVecObj = [MaplyVectorObject VectorObjectFromGeoJSON:[[NSFileManager defaultManager] contentsAtPath:path]];
     sanJoseCompObj = [globeVC addVectors:@[sanJoseVecObj] desc:@{
-                                                               kMaplyVecTexture:    [UIImage imageNamed:@"bgBlue.png"],
-                                                               kMaplyDrawPriority:  @(500),
-                                                               kMaplyFilled:        @(YES)}];
-
-
+                                                           kMaplyVecTexture:    [UIImage imageNamed:@"bgBlue.png"],
+                                                           kMaplyDrawPriority:  @(500),
+                                                           kMaplyFilled:        @(YES)}];
     
-    // Add Micello map
+    // Add Westfield Valley Fair mall map
     NSString *micelloKey = [NSString stringWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"micelloKey" ofType:nil] encoding:NSASCIIStringEncoding error:nil];
     micelloKey = [micelloKey stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
     NSString *baseURL = @"http://mfs.micello.com/ms/v1/mfile/map/78/mv/-/ev/-/geojson";
@@ -62,8 +61,9 @@
     
     [micelloMap startFetchMapWithSuccess:^() {
         [micelloMap addDefaultStyleRules];
-        [globeVC setPosition:MaplyCoordinateMakeWithDegrees(micelloMap.centerLonDeg, micelloMap.centerLatDeg) height:0.0002];
+        [globeVC setPosition:MaplyCoordinateMakeWithDegrees(micelloMap.centerLonDeg, micelloMap.centerLatDeg) height:0.0001];
         
+        // Add a segmented control to support switching between map levels.
         if (micelloMap.zLevels.count>1) {
             segCtrl = [[UISegmentedControl alloc] initWithItems:[micelloMap.zLevels valueForKey:@"stringValue"]];
             segCtrl.selectedSegmentIndex = 0;
@@ -71,6 +71,7 @@
             [segCtrl addTarget:self action:@selector(onSegChange) forControlEvents:UIControlEventValueChanged];
             [globeVC.view addSubview:segCtrl];
         }
+        
         if (micelloMap.zLevels.count>0)
             [micelloMap setZLevel:((NSNumber *)micelloMap.zLevels[0]).intValue viewC:globeVC];
         
@@ -84,7 +85,7 @@
 }
 
 - (void)globeViewController:(WhirlyGlobeViewController *__nonnull)viewC didSelect:(NSObject *__nonnull)selectedObj {
-
+    
     MaplyMicelloMapEntity *entity = [micelloMap select:selectedObj viewC:viewC];
     if (!entity)
         return;

@@ -114,6 +114,9 @@
 				E59DBB8C1CBFF0950025B4D6 /* MaplyMicelloMap.m */,
 				E59DBB651CBFDA200025B4D6 /* AppDelegate.h */,
 				E59DBB661CBFDA200025B4D6 /* AppDelegate.m */,
+				E56727411CC2CA7600D2E89A /* SimpleAnnotationViewController.h */,
+				E56727421CC2CA7600D2E89A /* SimpleAnnotationViewController.m */,
+				E56727431CC2CA7600D2E89A /* SimpleAnnotationViewController.xib */,
 				E59DBB681CBFDA200025B4D6 /* ViewController.h */,
 				E59DBB691CBFDA200025B4D6 /* ViewController.m */,
 				E59DBB6B1CBFDA200025B4D6 /* Main.storyboard */,
@@ -121,9 +124,6 @@
 				E59DBB701CBFDA200025B4D6 /* LaunchScreen.storyboard */,
 				E59DBB731CBFDA200025B4D6 /* Info.plist */,
 				E59DBB621CBFDA200025B4D6 /* Supporting Files */,
-				E56727411CC2CA7600D2E89A /* SimpleAnnotationViewController.h */,
-				E56727421CC2CA7600D2E89A /* SimpleAnnotationViewController.m */,
-				E56727431CC2CA7600D2E89A /* SimpleAnnotationViewController.xib */,
 			);
 			path = WhirlyGlobeMicelloDemo;
 			sourceTree = "<group>";
