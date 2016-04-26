@@ -23,6 +23,9 @@ xcuserdata
 *.xcuserstate
 *.xcscmblueprint
 
+## Don't commit secret Micello key
+micelloKey
+
 ## Obj-C/Swift specific
 *.hmap
 *.ipa
