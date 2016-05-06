@@ -8,6 +8,18 @@
 
 /* Begin PBXBuildFile section */
 		E53C84131CC8111300F396E2 /* micelloKey in Resources */ = {isa = PBXBuildFile; fileRef = E53C84121CC8111300F396E2 /* micelloKey */; };
+		E53FBA751CDB09EB0061D062 /* ATM.png in Resources */ = {isa = PBXBuildFile; fileRef = E53FBA691CDB09EB0061D062 /* ATM.png */; };
+		E53FBA761CDB09EB0061D062 /* Bathroom.png in Resources */ = {isa = PBXBuildFile; fileRef = E53FBA6A1CDB09EB0061D062 /* Bathroom.png */; };
+		E53FBA771CDB09EB0061D062 /* Bus.png in Resources */ = {isa = PBXBuildFile; fileRef = E53FBA6B1CDB09EB0061D062 /* Bus.png */; };
+		E53FBA781CDB09EB0061D062 /* Changing Station.png in Resources */ = {isa = PBXBuildFile; fileRef = E53FBA6C1CDB09EB0061D062 /* Changing Station.png */; };
+		E53FBA791CDB09EB0061D062 /* Disabled Access.png in Resources */ = {isa = PBXBuildFile; fileRef = E53FBA6D1CDB09EB0061D062 /* Disabled Access.png */; };
+		E53FBA7A1CDB09EB0061D062 /* Elevator.png in Resources */ = {isa = PBXBuildFile; fileRef = E53FBA6E1CDB09EB0061D062 /* Elevator.png */; };
+		E53FBA7B1CDB09EB0061D062 /* Escalator.png in Resources */ = {isa = PBXBuildFile; fileRef = E53FBA6F1CDB09EB0061D062 /* Escalator.png */; };
+		E53FBA7C1CDB09EB0061D062 /* Information.png in Resources */ = {isa = PBXBuildFile; fileRef = E53FBA701CDB09EB0061D062 /* Information.png */; };
+		E53FBA7D1CDB09EB0061D062 /* Mail.png in Resources */ = {isa = PBXBuildFile; fileRef = E53FBA711CDB09EB0061D062 /* Mail.png */; };
+		E53FBA7E1CDB09EB0061D062 /* Santa.png in Resources */ = {isa = PBXBuildFile; fileRef = E53FBA721CDB09EB0061D062 /* Santa.png */; };
+		E53FBA7F1CDB09EB0061D062 /* Stroller.png in Resources */ = {isa = PBXBuildFile; fileRef = E53FBA731CDB09EB0061D062 /* Stroller.png */; };
+		E53FBA801CDB09EB0061D062 /* Wifi.png in Resources */ = {isa = PBXBuildFile; fileRef = E53FBA741CDB09EB0061D062 /* Wifi.png */; };
 		E56727441CC2CA7600D2E89A /* SimpleAnnotationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E56727421CC2CA7600D2E89A /* SimpleAnnotationViewController.m */; };
 		E56727451CC2CA7600D2E89A /* SimpleAnnotationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E56727431CC2CA7600D2E89A /* SimpleAnnotationViewController.xib */; };
 		E56FB5DD1CC1774300F25D47 /* bgBlue.png in Resources */ = {isa = PBXBuildFile; fileRef = E56FB5DB1CC1774300F25D47 /* bgBlue.png */; };
@@ -41,6 +53,18 @@
 
 /* Begin PBXFileReference section */
 		E53C84121CC8111300F396E2 /* micelloKey */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = micelloKey; sourceTree = "<group>"; };
+		E53FBA691CDB09EB0061D062 /* ATM.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ATM.png; path = icons/ATM.png; sourceTree = SOURCE_ROOT; };
+		E53FBA6A1CDB09EB0061D062 /* Bathroom.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Bathroom.png; path = icons/Bathroom.png; sourceTree = SOURCE_ROOT; };
+		E53FBA6B1CDB09EB0061D062 /* Bus.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Bus.png; path = icons/Bus.png; sourceTree = SOURCE_ROOT; };
+		E53FBA6C1CDB09EB0061D062 /* Changing Station.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Changing Station.png"; path = "icons/Changing Station.png"; sourceTree = SOURCE_ROOT; };
+		E53FBA6D1CDB09EB0061D062 /* Disabled Access.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Disabled Access.png"; path = "icons/Disabled Access.png"; sourceTree = SOURCE_ROOT; };
+		E53FBA6E1CDB09EB0061D062 /* Elevator.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Elevator.png; path = icons/Elevator.png; sourceTree = SOURCE_ROOT; };
+		E53FBA6F1CDB09EB0061D062 /* Escalator.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Escalator.png; path = icons/Escalator.png; sourceTree = SOURCE_ROOT; };
+		E53FBA701CDB09EB0061D062 /* Information.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Information.png; path = icons/Information.png; sourceTree = SOURCE_ROOT; };
+		E53FBA711CDB09EB0061D062 /* Mail.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Mail.png; path = icons/Mail.png; sourceTree = SOURCE_ROOT; };
+		E53FBA721CDB09EB0061D062 /* Santa.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Santa.png; path = icons/Santa.png; sourceTree = SOURCE_ROOT; };
+		E53FBA731CDB09EB0061D062 /* Stroller.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Stroller.png; path = icons/Stroller.png; sourceTree = SOURCE_ROOT; };
+		E53FBA741CDB09EB0061D062 /* Wifi.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Wifi.png; path = icons/Wifi.png; sourceTree = SOURCE_ROOT; };
 		E56727411CC2CA7600D2E89A /* SimpleAnnotationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SimpleAnnotationViewController.h; sourceTree = "<group>"; };
 		E56727421CC2CA7600D2E89A /* SimpleAnnotationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SimpleAnnotationViewController.m; sourceTree = "<group>"; };
 		E56727431CC2CA7600D2E89A /* SimpleAnnotationViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SimpleAnnotationViewController.xib; sourceTree = "<group>"; };
@@ -85,6 +109,25 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		E53FBA671CDB09D70061D062 /* icons */ = {
+			isa = PBXGroup;
+			children = (
+				E53FBA691CDB09EB0061D062 /* ATM.png */,
+				E53FBA6A1CDB09EB0061D062 /* Bathroom.png */,
+				E53FBA6B1CDB09EB0061D062 /* Bus.png */,
+				E53FBA6C1CDB09EB0061D062 /* Changing Station.png */,
+				E53FBA6D1CDB09EB0061D062 /* Disabled Access.png */,
+				E53FBA6E1CDB09EB0061D062 /* Elevator.png */,
+				E53FBA6F1CDB09EB0061D062 /* Escalator.png */,
+				E53FBA701CDB09EB0061D062 /* Information.png */,
+				E53FBA711CDB09EB0061D062 /* Mail.png */,
+				E53FBA721CDB09EB0061D062 /* Santa.png */,
+				E53FBA731CDB09EB0061D062 /* Stroller.png */,
+				E53FBA741CDB09EB0061D062 /* Wifi.png */,
+			);
+			name = icons;
+			sourceTree = "<group>";
+		};
 		E59DBB561CBFDA200025B4D6 = {
 			isa = PBXGroup;
 			children = (
@@ -131,6 +174,7 @@
 		E59DBB621CBFDA200025B4D6 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				E53FBA671CDB09D70061D062 /* icons */,
 				E53C84121CC8111300F396E2 /* micelloKey */,
 				E56FB5DB1CC1774300F25D47 /* bgBlue.png */,
 				E56FB5DC1CC1774300F25D47 /* bgYellow.png */,
@@ -222,14 +266,26 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E53FBA7D1CDB09EB0061D062 /* Mail.png in Resources */,
+				E53FBA771CDB09EB0061D062 /* Bus.png in Resources */,
+				E53FBA7C1CDB09EB0061D062 /* Information.png in Resources */,
+				E53FBA7A1CDB09EB0061D062 /* Elevator.png in Resources */,
 				E59DBB721CBFDA200025B4D6 /* LaunchScreen.storyboard in Resources */,
 				E59DBB901CC004BF0025B4D6 /* SanJoseBoundary.geojson in Resources */,
+				E53FBA801CDB09EB0061D062 /* Wifi.png in Resources */,
 				E56FB5DD1CC1774300F25D47 /* bgBlue.png in Resources */,
 				E56727451CC2CA7600D2E89A /* SimpleAnnotationViewController.xib in Resources */,
 				E59DBB6F1CBFDA200025B4D6 /* Assets.xcassets in Resources */,
+				E53FBA791CDB09EB0061D062 /* Disabled Access.png in Resources */,
+				E53FBA7F1CDB09EB0061D062 /* Stroller.png in Resources */,
+				E53FBA781CDB09EB0061D062 /* Changing Station.png in Resources */,
+				E53FBA761CDB09EB0061D062 /* Bathroom.png in Resources */,
+				E53FBA7E1CDB09EB0061D062 /* Santa.png in Resources */,
 				E56FB5DE1CC1774300F25D47 /* bgYellow.png in Resources */,
+				E53FBA751CDB09EB0061D062 /* ATM.png in Resources */,
 				E59DBB6D1CBFDA200025B4D6 /* Main.storyboard in Resources */,
 				E59DBB911CC004BF0025B4D6 /* SantaClaraBoundary.geojson in Resources */,
+				E53FBA7B1CDB09EB0061D062 /* Escalator.png in Resources */,
 				E53C84131CC8111300F396E2 /* micelloKey in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
