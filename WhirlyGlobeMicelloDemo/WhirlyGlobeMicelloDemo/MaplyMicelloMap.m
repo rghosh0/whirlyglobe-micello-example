@@ -103,7 +103,7 @@
     int _baseDrawPriority;
     
     NSDictionary *_entities;
-    MaplyComponentObject *_outlinesCompObj, *_labelsCompObj, *_highlightCompObj, *_markersCompObj;
+    MaplyComponentObject  *_labelsCompObj, *_highlightCompObj, *_markersCompObj;
     NSMutableArray *_fillCompObjs;
     NSMutableArray *_styleRules;
 }
@@ -537,8 +537,21 @@
 
     marker.image = image;
     marker.size = CGSizeMake( image.size.width / 4.0, image.size.height / 4.0);
+    marker.layoutImportance = 1e6;
 
     return marker;
+}
+
+- (UIColor *)darkenColor:(UIColor *)color
+{
+    CGFloat h, s, b, a;
+    if ([color getHue:&h saturation:&s brightness:&b alpha:&a])
+        return [UIColor colorWithHue:h
+                          saturation:s
+                          brightness:b * 0.75
+                               alpha:a];
+    
+    return color;
 }
 
 - (void)setZLevel:(int)zLevel viewC:(MaplyBaseViewController *__nonnull)viewC {
@@ -587,10 +600,10 @@
         NSDictionary *labelsDesc = @{
                                      kMaplyDrawPriority: @(_baseDrawPriority+30),
                                      kMaplyFont: [UIFont systemFontOfSize:18.0],
-                                     kMaplyTextOutlineColor: [UIColor darkGrayColor],
+                                     kMaplyTextOutlineColor: [UIColor whiteColor],
                                      kMaplyTextOutlineSize: @(1.0),
                                      kMaplyJustify: @"center",
-                                     kMaplyTextColor: [UIColor whiteColor]
+                                     kMaplyTextColor: [UIColor blackColor]
                                      };
 
         NSDictionary *markersDesc = @{
@@ -601,7 +614,7 @@
         
         NSMutableArray *selFeaturesArrays = [NSMutableArray array];
         NSMutableArray *noSelFeaturesArrays = [NSMutableArray array];
-        NSMutableArray *outlineFeatures = [NSMutableArray array];
+//        NSMutableArray *outlineFeatures = [NSMutableArray array];
         NSMutableArray *labels = [NSMutableArray array];
         NSMutableArray *markers = [NSMutableArray array];
         
@@ -620,7 +633,7 @@
 
                 if (vecType == MaplyVectorArealType) {
 
-                    [outlineFeatures addObject:feature];
+//                    [outlineFeatures addObject:feature];
                     int styleIndex = [self styleIndexForFeature:feature];
 
                     if (feature.attributes[@"entities"]) {
@@ -645,13 +658,24 @@
         
         // Add sorted vector features to map.
         for (int i=0; i<_styleRules.count+1; i++) {
-            MaplyComponentObject *selCompObj = [viewC addVectors:((NSMutableArray *)selFeaturesArrays[i]) desc:[self vectorDescForStyleIndex:i baseDesc:fillSelDesc]];
+            // The feature itself
+            NSDictionary *desc = [self vectorDescForStyleIndex:i baseDesc:fillSelDesc];
+            MaplyComponentObject *selCompObj = [viewC addVectors:((NSMutableArray *)selFeaturesArrays[i]) desc:desc];
+
+            // An outline, slightly darker
+            NSDictionary *thisOutlineDesc = [self vectorDescForStyleIndex:i baseDesc:outlineDesc];
+            UIColor *color = thisOutlineDesc[kMaplyColor];
+            NSMutableDictionary *newOutlineDesc = [NSMutableDictionary dictionaryWithDictionary:thisOutlineDesc];
+            newOutlineDesc[kMaplyColor] = [self darkenColor:color];
+            newOutlineDesc[kMaplyDrawPriority] = @(_baseDrawPriority+20);
+            MaplyComponentObject *selOutlineCompObj = [viewC addVectors:((NSMutableArray *)selFeaturesArrays[i]) desc:newOutlineDesc];
+            
             [_fillCompObjs addObject:selCompObj];
+            [_fillCompObjs addObject:selOutlineCompObj];
             MaplyComponentObject *noSelCompObj = [viewC addVectors:((NSMutableArray *)noSelFeaturesArrays[i]) desc:[self vectorDescForStyleIndex:i baseDesc:fillNoSelDesc]];
             [_fillCompObjs addObject:noSelCompObj];
         }
         
-        _outlinesCompObj = [viewC addVectors:outlineFeatures desc:outlineDesc];
         _labelsCompObj = [viewC addScreenLabels:labels desc:labelsDesc];
         _markersCompObj = [viewC addScreenMarkers:markers desc:markersDesc];
         
@@ -721,10 +745,6 @@
             for (MaplyComponentObject *compObj in _fillCompObjs)
                 [viewC removeObject:compObj];
             _fillCompObjs = [NSMutableArray array];
-        }
-        if (_outlinesCompObj) {
-            [viewC removeObject:_outlinesCompObj];
-            _outlinesCompObj = nil;
         }
         if (_labelsCompObj) {
             [viewC removeObject:_labelsCompObj];

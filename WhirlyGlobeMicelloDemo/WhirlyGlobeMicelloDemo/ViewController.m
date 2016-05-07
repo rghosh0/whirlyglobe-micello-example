@@ -45,6 +45,7 @@
     MaplyVectorObject *santaClaraVecObj = [MaplyVectorObject VectorObjectFromGeoJSON:[[NSFileManager defaultManager] contentsAtPath:path]];
     santaClaraCompObj = [globeVC addVectors:@[santaClaraVecObj] desc:@{
                                                                kMaplyVecTexture:    [UIImage imageNamed:@"bgYellow.png"],
+                                                               kMaplyColor: [UIColor colorWithWhite:0.2 alpha:0.2],
                                                                kMaplyDrawPriority:  @(400),
                                                                kMaplyFilled:        @(YES)}];
     
@@ -53,6 +54,7 @@
     MaplyVectorObject *sanJoseVecObj = [MaplyVectorObject VectorObjectFromGeoJSON:[[NSFileManager defaultManager] contentsAtPath:path]];
     sanJoseCompObj = [globeVC addVectors:@[sanJoseVecObj] desc:@{
                                                            kMaplyVecTexture:    [UIImage imageNamed:@"bgBlue.png"],
+                                                           kMaplyColor: [UIColor colorWithWhite:0.2 alpha:0.2],
                                                            kMaplyDrawPriority:  @(500),
                                                            kMaplyFilled:        @(YES)}];
     
