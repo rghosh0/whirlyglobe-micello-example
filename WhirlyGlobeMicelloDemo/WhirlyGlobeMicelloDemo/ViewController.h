@@ -11,6 +11,4 @@
 
 @interface ViewController : UIViewController <WhirlyGlobeViewControllerDelegate>
 
-
 @end
-
