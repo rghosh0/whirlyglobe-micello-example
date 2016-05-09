@@ -44,7 +44,7 @@
     NSString *path = [[NSBundle mainBundle] pathForResource:@"SantaClaraBoundary" ofType:@"geojson"];
     MaplyVectorObject *santaClaraVecObj = [MaplyVectorObject VectorObjectFromGeoJSON:[[NSFileManager defaultManager] contentsAtPath:path]];
     santaClaraCompObj = [globeVC addVectors:@[santaClaraVecObj] desc:@{
-                                                               kMaplyVecTexture:    [UIImage imageNamed:@"bgYellow.png"],
+                                                               kMaplyVecTexture:    [UIImage imageNamed:@"bgOrange.png"],
                                                                kMaplyColor: [UIColor colorWithWhite:0.2 alpha:0.2],
                                                                kMaplyDrawPriority:  @(400),
                                                                kMaplyFilled:        @(YES)}];
